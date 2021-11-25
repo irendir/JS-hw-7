@@ -2,7 +2,7 @@ window.countriesBackup = [];
 
 function getCode() {
     const code = document.getElementById('country-code');
-    code.addEventListener('change', e => code.innerHTML = countriesBackup.map(country => `<option>${country.alpha3Code}</option>`).join(''));
+    code.addEventListener('change', e => code.innerHTML = countriesBackup.map(country => `<option>${country.alpha3Code}</option>`));
     code.dispatchEvent(new Event('change'));
 }
 
