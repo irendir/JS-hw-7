@@ -2,7 +2,7 @@ window.countriesBackup = [];
 
 function getCode() {
     const code = document.getElementById('country-code');
-    code.addEventListener('change', e => code.innerHTML = countriesBackup.map(country => `<option>${country.alpha3Code}</option>`));
+    code.addEventListener('change', e => code.innerHTML = countriesBackup.map(country => `<option>${country.region}</option>`));
     code.dispatchEvent(new Event('change'));
 }
 
@@ -17,10 +17,11 @@ function setListeners() {
     searchInput.onkeyup = e => {
         let searchValue = e.currentTarget.value;
         console.log(searchValue);
-        let filteredCountries = window.countriesBackup.filter(country => country.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 
-        // || country.capital.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
-        || country.region.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
-        );
+        let filteredCountries = window.countriesBackup.filter(country => {
+            return country.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 
+        || country.capital.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+        || country.region.toLowerCase().indexOf(searchValue.toLowerCase()) > -1;
+    }   );
         renderCountries(filteredCountries);
     }
 }
@@ -49,7 +50,7 @@ function loadCountries() {
             return {
                 alpha3Code: country.alpha3Code,
                 name: country.name,
-                capital: country.capital,
+                capital: country.capital || '',
                 region: country.region,
                 population: country.population,
                 flag: country.flag,
